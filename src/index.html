@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini SysMonitor 1.0.1 by Snuber</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+	<h1>Mini SysMonitor</h1>
+    <button onclick="mylang()">PT/EN</button>
+	<br>
+	<div class="box">
+	<table>
+		<tr>
+			<th id="1">Plataforma</th>
+			<th><span id="platform">-</span></th>
+		</tr>
+		<tr>
+			<th id="2">Sistema Operativo</th>
+			<th><span id="version">-</span></th>
+		</tr>
+		<tr>
+			<th id="3">Processador</th>
+			<th><span id="brand">-</span> <span id="model">-</span></th>
+		</tr>
+		<tr>
+			<th id="">MB</th>
+			<th><span id="mobo">-</span></th>
+		</tr>
+		<tr>
+			<th id="4">Nº núcleos</th>
+			<th><span id="cpuCount">-</span></th>
+		</tr>
+		<tr>
+			<th id="5">Uso CPU</th>
+			<th><span id="use">-</span> %</th>
+		</tr>		
+		<tr>
+			<th id="6">Memória total</th>
+			<th><span id="totalmem">-</span> MB</th>
+		</tr>
+		<tr>
+			<th id="7">Memória livre</th>
+			<th><span id="freemem">-</span> MB</th>
+		</tr>
+		<tr>
+			<th id="8">Tempo ligado</th>
+			<th><span id="upsys">-</span> mins</th>
+		</tr>
+		<tr>
+			<th id="9">GPU</th>
+			<th><span id="gpu">-</span></th>
+		</tr>
+	<table>		
+		<tr>
+			<th id="10" style="width:25%">Disco 1</th>
+			<th style="width:24%"><span id="type">-</span> GB</th>
+			<th><span id="disk">-</span></th>
+		</tr>
+		<tr>
+			<th id="12" style="width:25%">Disco 2</th>
+			<th style="width:24%"><span id="type1">-</span> GB</th>
+			<th><span id="disk1">-</span></th>
+		</tr>
+		<tr>
+			<th id="13" style="width:25%">Disco 3</th>
+			<th style="width:24%"><span id="type2">-</span> GB</th>
+			<th><span id="disk2">-</span></th>
+		</tr>
+	</table>
+	</table>
+	</div>
+	
+	<p style="text-align:center;"> By: <a href="https://github.com/thesnuber" target="_blank"><button type="button">snuber github</a>
+	
+	
+	
+	<script>
+	const electron = require('electron');
+	const ipcRenderer = electron.ipcRenderer;
+	
+	
+	ipcRenderer.on('version',(event,data) => {
+	document.getElementById('platform').innerHTML = data.arch;
+	});
+	ipcRenderer.on('use',(event,data) => {
+	 document.getElementById('use').innerHTML = data.toFixed(2);
+	});
+	ipcRenderer.on('version',(event,data) => {
+	document.getElementById('version').innerHTML = data.distro;
+	});
+	ipcRenderer.on('cpu',(event,data) => {
+	document.getElementById('cpuCount').innerHTML = data.physicalCores;
+	});
+	ipcRenderer.on('cpu',(event,data) => {
+	document.getElementById('brand').innerHTML = data.manufacturer;
+	});
+	ipcRenderer.on('cpu',(event,data) => {
+	document.getElementById('model').innerHTML = data.brand;
+	});
+	ipcRenderer.on('totalmem',(event,data) => {
+	document.getElementById('totalmem').innerHTML = data.toFixed(0);
+	});
+	ipcRenderer.on('freemem',(event,data) => {
+	document.getElementById('freemem').innerHTML = data.toFixed(0);
+	});
+	ipcRenderer.on('upsys',(event,data) => {
+	document.getElementById('upsys').innerHTML = data.toFixed(0);
+	});
+	ipcRenderer.on('gpu',(event,data) => {
+	document.getElementById('gpu').innerHTML = data.controllers[0].model;
+	});
+	ipcRenderer.on('disk',(event,data) => {
+	document.getElementById('disk').innerHTML = data[0].name;
+	});
+	ipcRenderer.on('disk',(event,data) => {
+	document.getElementById('disk1').innerHTML = data[1].name;
+	});
+	ipcRenderer.on('disk',(event,data) => {
+	document.getElementById('disk2').innerHTML = data[2].name;
+	});
+	ipcRenderer.on('disk',(event,data) => {
+	document.getElementById('type').innerHTML = Math.round(data[0].size/(1000*1000*1000));
+	});	
+	ipcRenderer.on('disk',(event,data) => {
+	// document.getElementById('type1').innerHTML = data[1].type;
+	document.getElementById('type1').innerHTML = Math.round(data[1].size/(1000*1000*1000));
+	});
+	ipcRenderer.on('disk',(event,data) => {
+	document.getElementById('type2').innerHTML = Math.round(data[2].size/(1000*1000*1000));
+	});
+	ipcRenderer.on('board',(event,data) => {
+	document.getElementById('mobo').innerHTML = data.model;
+	});
+		
+
+	function mylang() {
+  var x = document.getElementById("1");
+  if (x.innerHTML === "Plataforma") {
+    x.innerHTML = "Platform";
+  } else {
+    x.innerHTML = "Plataforma";
+  };
+    var x = document.getElementById("2");
+  if (x.innerHTML === "Sistema Operativo") {
+    x.innerHTML = "Operative <br> System";
+  } else {
+    x.innerHTML = "Sistema Operativo";
+  };
+  var x = document.getElementById("3");
+  if (x.innerHTML === "Processador") {
+    x.innerHTML = "Processor ";
+  } else {
+    x.innerHTML = "Processador";
+  };
+  var x = document.getElementById("4");
+  if (x.innerHTML === "Nº núcleos") {
+    x.innerHTML = " Cores number";
+  } else {
+    x.innerHTML = "Nº núcleos";
+  };
+  var x = document.getElementById("5");
+  if (x.innerHTML === "Uso CPU") {
+    x.innerHTML = "CPU usage";
+  } else {
+    x.innerHTML = "Uso CPU";
+  };
+  var x = document.getElementById("6");
+  if (x.innerHTML === "Memória total") {
+    x.innerHTML = "Total Memory";
+  } else {
+    x.innerHTML = "Memória total";
+  };
+  var x = document.getElementById("7");
+  if (x.innerHTML === "Memória livre") {
+    x.innerHTML = "Free memory";
+  } else {
+    x.innerHTML = "Memória livre";
+  };
+  var x = document.getElementById("8");
+  if (x.innerHTML === "Tempo ligado") {
+    x.innerHTML = "System uptime";
+  } else {
+    x.innerHTML = "Tempo ligado";
+  };
+  var x = document.getElementById("10");
+  if (x.innerHTML === "Disco 1") {
+    x.innerHTML = "Disk 1";
+  } else {
+    x.innerHTML = "Disco 1";
+  };
+  
+  var x = document.getElementById("12");
+  if (x.innerHTML === "Disco 2") {
+    x.innerHTML = "Disk 2";
+  } else {
+    x.innerHTML = "Disco 2";
+  };
+   var x = document.getElementById("13");
+  if (x.innerHTML === "Disco 3") {
+    x.innerHTML = "Disk 3";
+  } else {
+    x.innerHTML = "Disco 3";
+  };
+  
+  
+  
+}
+
+	</script>
+  </body>
+</html>

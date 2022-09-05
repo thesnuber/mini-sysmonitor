@@ -1,0 +1,72 @@
+{
+  "name": "minisys",
+  "productName": "Mini SysMonitor",
+  "icon": "src/icon.png",
+  "version": "1.0.1",
+  "description": "An app that will show basic details of the computer",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "build": {
+    "appId": "com.minisys",
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "src/icon.png"
+    }
+  },
+  "keywords": [],
+  "author": "snuber",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "src/favicon.ico"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "minisys"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "electron-forge": "^5.2.4",
+    "electron-packager": "^16.0.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "os-utils": "^0.0.14",
+    "systeminformation": "^5.12.6"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "electron": "20.1.1"
+  }
+}
