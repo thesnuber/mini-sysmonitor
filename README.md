@@ -5,5 +5,5 @@ A program that will give basic details of the system, based on Electron.JS
 
 
 
-It will read for the GPU the first device, while on the Disks will read the 3 first ones.
+It will read for the GPU the first device, while on the Disks will read the 3 first ones.<br>
 This was for a project on a programming course.
